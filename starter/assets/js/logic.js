@@ -15,7 +15,7 @@ var initialsInput = document.getElementById("initials");
 var submitButton = document.getElementById("submit");
 
 startButton.onclick = beginQuiz;
-submitButton.onclick = endQuiz; 
+// submitButton.onclick = endQuiz;
 
 function beginQuiz() {
     console.log("start button clicked, begin quiz function called");
@@ -104,6 +104,12 @@ function endQuiz() {
           var scores = JSON.parse(localStorage.getItem("scores")) || [];
           scores.push({ initials: initials, score: score });
           localStorage.setItem("scores", JSON.stringify(scores));
+          for (var i = 0; i < scores.length; i++) {
+            var liEl = document.createElement("li");
+            liEl.textContent = scores[i].score;
+            liEl.append(scores)
+
+          }
       }
     };
 }
