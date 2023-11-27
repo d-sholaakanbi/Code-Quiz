@@ -15,6 +15,7 @@ var initialsInput = document.getElementById("initials");
 var submitButton = document.getElementById("submit");
 
 startButton.onclick = beginQuiz;
+submitButton.onclick = endQuiz; 
 
 function beginQuiz() {
     console.log("start button clicked, begin quiz function called");
@@ -91,19 +92,20 @@ function endQuiz() {
 
         if (initials !== "") {
             // Save the score and initials
-            saveScore(initials, timeLeft);
-
+            saveScore(initials, timeLeft)
+            window.location.href = "http://127.0.0.1:5502/starter/highscores.html";
             // Redirect or display a thank you message, etc.
             console.log("Score saved! Thank you for playing.");
         } else {
             // Handle case where initials are not provided
             console.log("Please enter your initials.");
         }
+        function saveScore(initials, score) {
+          var scores = JSON.parse(localStorage.getItem("scores")) || [];
+          scores.push({ initials: initials, score: score });
+          localStorage.setItem("scores", JSON.stringify(scores));
+      }
     };
 }
 
-function saveScore(initials, score) {
-    var scores = JSON.parse(localStorage.getItem("scores")) || [];
-    scores.push({ initials: initials, score: score });
-    localStorage.setItem("scores", JSON.stringify(scores));
-}
+
